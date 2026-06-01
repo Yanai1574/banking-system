@@ -1,59 +1,47 @@
-
 import java.util.Scanner;
 
 public class User {
 
-    public static double bankBalnce = 0.0;
-
-    private int UserChoice;
+    private int userchoice;
 
     Scanner scanner = new Scanner(System.in);
 
+    public User(int userChoice) {
+        this.userchoice = userChoice;
+    }
 
-    public User(int UserChoice){
-        this.UserChoice = UserChoice;
+    public void showMenuResponse() {
 
-    } 
+        Transaction transaction = new Transaction(0); // ליצור העברה חדשה 
 
-    public int getUserChoice(){
-        return UserChoice;
+        if (userchoice == 1) {
 
-    } 
+            System.out.println(transaction.getBankBalance()); 
 
-    public void showMenuResponse(){
-        if (UserChoice == 1){
+        } else if (userchoice == 2) {
 
-        System.out.println("print the balance");
-        System.out.println(bankBalnce);
+            System.out.println("How much would you like to depo?");
+            double amount = scanner.nextDouble();
 
-        } else if (UserChoice == 2){
+            transaction.deposit(amount);
 
-        System.out.println("how match would you like to dipo?");
-        int dipo  = scanner.nextInt();
-        bankBalnce += dipo;
-        System.out.println("Successfully dipo. New balance: $" + bankBalnce);
+            System.out.println("New balance: " + transaction.getBankBalance());
 
+        } else if (userchoice == 3) {
 
-        }else if (UserChoice == 3){
+            System.out.println("How much would you like to withdraw?");
+            double amount = scanner.nextDouble(); // יצירת משתנה העברה
 
-            System.out.println("how match would you like to withdraw?");
-            int withdraw  = scanner.nextInt();
-            bankBalnce -= withdraw; 
-            System.out.println("Successfully withdrawn. New balance: $" + bankBalnce);
-        
-            
-        } else if (UserChoice == 4){
-            bankBalnce = 0.0;
+            transaction.withdraw(amount);
+
+            System.out.println("New balance: " + transaction.getBankBalance());
+
+        } else if (userchoice == 4) {
+            transaction.makeZero();
+
+        } else {
+
+            System.out.println("Typo");
         }
-        
-        else
-            System.out.println("typo");
-        }
-       }
-    
-
-    
-    
-
-    
-    
+    }
+}
